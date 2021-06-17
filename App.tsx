@@ -8,9 +8,10 @@ const stackAuxiliar = new Stack([]);
 export default function App () {
   const [input, setInput] = useState<string>('0')
   const [resetInput, setResetInput] = useState<boolean>(false)
-  
+  const [resetEqual, setResetEqual] = useState<boolean>(false)
+
+
   const operation=(operator: string)=>{
-    
       stack.push(input);
       stack.push(operator);
       stack.view();
@@ -19,6 +20,7 @@ export default function App () {
   }
 
   const execute = () => {
+    setResetEqual(true)
     console.log('i execute')
     stackAuxiliar.push(input);
     let resultOperation :number=0;
@@ -68,8 +70,13 @@ export default function App () {
   }
 
   const onPress =(number: string)=>{
+    if(resetEqual === true){
+      setInput(number)
+      setResetEqual(false)
+    }else{
     setInput( input === '0' || resetInput? number: (input + number))
     setResetInput(false)
+          }
   }
 
   const simbol =()=>{
@@ -128,23 +135,23 @@ export default function App () {
       <View style={{ flex: 4 }}>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>onPress('1')} style={styles.containerGreen}>
-              <Text style={styles.textColor}>1</Text>
+            <TouchableOpacity onPress={()=>onPress('7')} style={styles.containerGreen}>
+              <Text style={styles.textColor}>7</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>onPress('2')} style={styles.containerGreen}>
-              <Text style={styles.textColor}>2</Text>
+            <TouchableOpacity onPress={()=>onPress('8')} style={styles.containerGreen}>
+              <Text style={styles.textColor}>8</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>onPress('3')} style={styles.containerGreen}>
-              <Text style={styles.textColor}>3</Text>
+            <TouchableOpacity onPress={()=>onPress('9')} style={styles.containerGreen}>
+              <Text style={styles.textColor}>9</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>operation('+')} style={styles.containerBlue}>
-              <Text style={styles.textColor}>+</Text>
+            <TouchableOpacity onPress={()=>operation('/')} style={styles.containerBlue}>
+              <Text style={styles.textColor}>÷</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -165,30 +172,30 @@ export default function App () {
             </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>operation('-')} style={styles.containerBlue}>
-              <Text style={styles.textColor}>-</Text>
+            <TouchableOpacity onPress={()=>operation('*')} style={styles.containerBlue}>
+              <Text style={styles.textColor}>×</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>onPress('7')} style={styles.containerGreen}>
-              <Text style={styles.textColor}>7</Text>
+            <TouchableOpacity onPress={()=>onPress('1')} style={styles.containerGreen}>
+              <Text style={styles.textColor}>1</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>onPress('8')} style={styles.containerGreen}>
-              <Text style={styles.textColor}>8</Text>
+            <TouchableOpacity onPress={()=>onPress('2')} style={styles.containerGreen}>
+              <Text style={styles.textColor}>2</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>onPress('9')} style={styles.containerGreen}>
-              <Text style={styles.textColor}>9</Text>
+            <TouchableOpacity onPress={()=>onPress('3')} style={styles.containerGreen}>
+              <Text style={styles.textColor}>3</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>operation('*')} style={styles.containerBlue}>
-              <Text style={styles.textColor}>*</Text>
+            <TouchableOpacity onPress={()=>operation('-')} style={styles.containerBlue}>
+              <Text style={styles.textColor}>-</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -209,8 +216,8 @@ export default function App () {
             </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>operation('/')} style={styles.containerBlue}>
-              <Text style={{ color: "#fff", fontSize: 40 }}>/</Text>
+            <TouchableOpacity onPress={()=>operation('+')} style={styles.containerBlue}>
+              <Text style={{ color: "#fff", fontSize: 40 }}>+</Text>
             </TouchableOpacity>
           </View>
         </View>
