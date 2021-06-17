@@ -1,17 +1,15 @@
-import { StatusBar } from "expo-status-bar";
-import React, { Component, useEffect, useState } from "react";
-import { render } from "react-dom";
+import React, {  useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Stack from './Stack';
 
-const stack =new Stack();
-const stackAuxiliar = new Stack();
+const stack =new Stack([]);
+const stackAuxiliar = new Stack([]);
 
 export default function App () {
-  const [input, setInput] = useState('0')
-  const [resetInput, setResetInput] = useState(false)
+  const [input, setInput] = useState<string>('0')
+  const [resetInput, setResetInput] = useState<boolean>(false)
   
-  const operation=(operator)=>{
+  const operation=(operator: string)=>{
     
       stack.push(input);
       stack.push(operator);
@@ -23,34 +21,34 @@ export default function App () {
   const execute = () => {
     console.log('i execute')
     stackAuxiliar.push(input);
-    let resultOperation= 0;
-    let valueOne = 0;
-    let valueTwo = 0;
-    let operator = 0;
+    let resultOperation :number=0;
+    let valueOne : string;
+    let valueTwo : string;
+    let operator : string;
     while (stack.size() > 0 ) {
       console.log(stack.size())
-      stackAuxiliar.push(stack.pop());
+      stackAuxiliar.push(stack.pop() || '0');
       if(stackAuxiliar.peek() === '*'||stackAuxiliar.peek() === '/') {
-        operator = stackAuxiliar.pop();
-        valueOne = stack.pop();
-        valueTwo = stackAuxiliar.pop();
+        operator = stackAuxiliar.pop() || '+';
+        valueOne = stack.pop() || '0';
+        valueTwo = stackAuxiliar.pop() || '0';
         resultOperation = executeOperation(parseFloat(valueOne), parseFloat(valueTwo), operator);
-        stackAuxiliar.push(resultOperation+'');
+        stackAuxiliar.push(resultOperation + '');
       };
     };
     while (stackAuxiliar.size() > 1){
       console.log('****' + stackAuxiliar.size())
-      valueOne = stackAuxiliar.pop();
-      operator = stackAuxiliar.pop();
-      valueTwo = stackAuxiliar.pop();
+      valueOne = stackAuxiliar.pop() || '+';
+      operator = stackAuxiliar.pop() || '0';
+      valueTwo = stackAuxiliar.pop() || '0';
       resultOperation = executeOperation(parseFloat(valueOne),parseFloat(valueTwo), operator);
       console.log('$' + resultOperation)
-      stackAuxiliar.push(resultOperation);
+      stackAuxiliar.push(resultOperation + '');
     };
-    setInput(resultOperation);
+    setInput(resultOperation+'');
   }
 
-  const executeOperation = (number1,number2, operator)=>{
+  const executeOperation = (number1: number,number2: number, operator: string)=>{
     let result = 0;
     switch (operator) {
       case '+':
@@ -69,7 +67,7 @@ export default function App () {
     return result;
   }
 
-  const onPress =(number)=>{
+  const onPress =(number: string)=>{
     setInput( input === '0' || resetInput? number: (input + number))
     setResetInput(false)
   }

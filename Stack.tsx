@@ -1,20 +1,21 @@
-export default class Stack {
-    constructor() {
+import IStack from "./IStack";
 
-      this.stack = [];
-      
-    }
+export default class Stack implements IStack {
+  stack: string[]
+    
+  constructor(stack: string[]) {
+      this.stack = stack;
+  }
 
-    push(item) {
+    push(item:string) {
       this.stack.push(item);
     }
 
-    pop() {
-    return  this.stack.pop();
-    
+    pop(): string | undefined {
+      return this.stack.pop();
     }
 
-    size(){
+    size(): number{
       return this.stack.length;
       
     }
@@ -22,7 +23,7 @@ export default class Stack {
       return this.stack[this.stack.length - 1];
     }
 
-    view(){
+    view(): void{
         console.log('########')
         for(let i=this.stack.length-1; i>=0; i--){
           
@@ -31,7 +32,7 @@ export default class Stack {
         console.log('########')
     }
 
-    clearArray(){
+    clearArray(): void{
         this.stack=[];
     }
    };
