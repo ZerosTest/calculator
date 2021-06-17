@@ -1,16 +1,12 @@
 import React, {  useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Stack from './Stack';
-
 const stack =new Stack([]);
 const stackAuxiliar = new Stack([]);
-
 export default function App () {
   const [input, setInput] = useState<string>('0')
   const [resetInput, setResetInput] = useState<boolean>(false)
   const [resetEqual, setResetEqual] = useState<boolean>(false)
-
-
   const operation=(operator: string)=>{
       stack.push(input);
       stack.push(operator);
@@ -18,7 +14,6 @@ export default function App () {
       setResetInput(true)
       stackAuxiliar.clearArray();
   }
-
   const execute = () => {
     setResetEqual(true)
     console.log('i execute')
@@ -49,7 +44,6 @@ export default function App () {
     };
     setInput(resultOperation+'');
   }
-
   const executeOperation = (number1: number,number2: number, operator: string)=>{
     let result = 0;
     switch (operator) {
@@ -68,9 +62,8 @@ export default function App () {
     }
     return result;
   }
-
   const onPress =(number: string)=>{
-    if(resetEqual === true){
+    if(resetEqual){
       setInput(number)
       setResetEqual(false)
     }else{
@@ -78,13 +71,11 @@ export default function App () {
     setResetInput(false)
           }
   }
-
   const simbol =()=>{
     const value = parseFloat(input) * (-1) 
     setInput(value + '')
     
   }
-
   const clear = () => {
     setInput('0'); 
     stack.clearArray();
@@ -92,7 +83,6 @@ export default function App () {
     stack.view();
     stackAuxiliar.view();
   }
-
   const dot =()=>{
     if(input.includes('.')){
       setInput(input);
@@ -100,7 +90,6 @@ export default function App () {
       setInput(input + '.');
     }
   }
-
     return (
     <View style={{ flex: 1 }}>
       <View
@@ -131,7 +120,6 @@ export default function App () {
           </View>
         </View>
       </View>
-
       <View style={{ flex: 4 }}>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
@@ -225,7 +213,6 @@ export default function App () {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   containerRed: {
     backgroundColor: "red",
