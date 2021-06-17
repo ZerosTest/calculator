@@ -86,6 +86,14 @@ export default function App () {
     stackAuxiliar.view();
   }
 
+  const dot =()=>{
+    if(input.includes('.')){
+      setInput(input);
+    }else{
+      setInput(input + '.');
+    }
+  }
+
     return (
     <View style={{ flex: 1 }}>
       <View
@@ -196,7 +204,7 @@ export default function App () {
             </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
-          <TouchableOpacity onPress={()=>{setInput(input + '.')}} style={styles.containerGreen}>
+          <TouchableOpacity onPress={()=>dot()} style={styles.containerGreen}>
               <Text style={styles.textColor}>.</Text>
             </TouchableOpacity>
           </View>
