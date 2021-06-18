@@ -20,7 +20,6 @@ export default function App () {
 
   const execute = () => {
     if(abilityClear){
-    console.log('i execute')
     stackAuxiliar.push(input);
     let resultOperation :number=0;
     let valueOne : string;
@@ -38,7 +37,6 @@ export default function App () {
       };
     };
     while (stackAuxiliar.size() > 1){
-      console.log('****' + stackAuxiliar.size())
       valueOne = stackAuxiliar.pop() || '+';
       operator = stackAuxiliar.pop() || '0';
       valueTwo = stackAuxiliar.pop() || '0';
