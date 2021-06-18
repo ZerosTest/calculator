@@ -8,17 +8,18 @@ const stackAuxiliar = new Stack([]);
 export default function App () {
   const [input, setInput] = useState<string>('0')
   const [resetInput, setResetInput] = useState<boolean>(false)
-  
+  const [abilityClear , setAbilityClear] = useState<boolean>(false)
   const operation=(operator: string)=>{
-    
       stack.push(input);
       stack.push(operator);
       stack.view();
       setResetInput(true)
       stackAuxiliar.clearArray();
+      setAbilityClear(true)
   }
 
   const execute = () => {
+    if(abilityClear){
     console.log('i execute')
     stackAuxiliar.push(input);
     let resultOperation :number=0;
@@ -46,6 +47,10 @@ export default function App () {
       stackAuxiliar.push(resultOperation + '');
     };
     setInput(resultOperation+'');
+    setAbilityClear(false)
+  }else{
+    setInput(input)
+  }
   }
 
   const executeOperation = (number1: number,number2: number, operator: string)=>{
@@ -68,8 +73,14 @@ export default function App () {
   }
 
   const onPress =(number: string)=>{
+    if(stack.peek() === '*'||stack.peek() === '/' ||stack.peek() === '+' ||stack.peek() === '-'){
     setInput( input === '0' || resetInput? number: (input + number))
     setResetInput(false)
+  }else{
+    setInput( input === '0' || resetInput? number: (input + number))
+    setResetInput(false)
+    setAbilityClear(false)
+  }
   }
 
   const simbol =()=>{
