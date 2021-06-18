@@ -25,6 +25,7 @@ export default function App () {
     let valueOne : string;
     let valueTwo : string;
     let operator : string;
+    let numberToString : string;
     while (stack.size() > 0 ) {
       console.log(stack.size())
       stackAuxiliar.push(stack.pop() || '0');
@@ -45,7 +46,10 @@ export default function App () {
       console.log('$' + resultOperation)
       stackAuxiliar.push(resultOperation + '');
     };
-    setInput(resultOperation+'');
+    numberToString = resultOperation + ''
+    numberToString = numberToString.slice(0, (numberToString.indexOf(".")) + 6);
+    
+    setInput(numberToString);
   }
 
   const executeOperation = (number1: number,number2: number, operator: string)=>{
