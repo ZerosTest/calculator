@@ -18,7 +18,6 @@ export default function App() {
   };
 
   const execute = () => {
-    console.log("i execute");
     stackAuxiliar.push(input);
     let resultOperation: number = 0;
     let valueOne: string;
@@ -26,7 +25,6 @@ export default function App() {
     let operator: string;
     let numberToString: string;
     while (stack.size() > 0) {
-      console.log(stack.size());
       stackAuxiliar.push(stack.pop() || "0");
       if (stackAuxiliar.peek() === "*" || stackAuxiliar.peek() === "/") {
         operator = stackAuxiliar.pop() || "+";
@@ -41,7 +39,6 @@ export default function App() {
       }
     }
     while (stackAuxiliar.size() > 1) {
-      console.log("****" + stackAuxiliar.size());
       valueOne = stackAuxiliar.pop() || "+";
       operator = stackAuxiliar.pop() || "0";
       valueTwo = stackAuxiliar.pop() || "0";
@@ -50,7 +47,6 @@ export default function App() {
         parseFloat(valueTwo),
         operator
       );
-      console.log("$" + resultOperation);
       stackAuxiliar.push(resultOperation + "");
     }
     numberToString = resultOperation + "";
