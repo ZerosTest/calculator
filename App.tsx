@@ -65,7 +65,7 @@ export default function App () {
         break;
       case '/':
         result= number1 / number2;
-        break;    
+        break;
     }
     return result;
   }
@@ -82,13 +82,13 @@ export default function App () {
   }
 
   const simbol =()=>{
-    const value = parseFloat(input) * (-1) 
+    const value = parseFloat(input) * (-1)
     setInput(value + '')
     
   }
 
   const clear = () => {
-    setInput('0'); 
+    setInput('0');
     stack.clearArray();
     stackAuxiliar.clearArray();
     stack.view();
